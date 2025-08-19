@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Travel Planner</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(120deg, #c7f9cc, #fef9ef, #a0e7e5);
+      margin: 0;
+      padding: 0;
+      color: #1e293b;
+    }
+
+    /* Welcome Section */
+    .welcome-section {
+      background: linear-gradient(135deg, #0ea5e9, #2563EB);
+      color: white;
+      padding: 70px 20px;
+      text-align: center;
+      border-bottom-left-radius: 50% 10%;
+      border-bottom-right-radius: 50% 10%;
+    }
+
+    .welcome-section h1 {
+      font-size: 2.8rem;
+      margin-bottom: 10px;
+    }
+
+    .welcome-section p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+
+    /* Register Form */
+    .form-section {
+      padding: 25px;
+      background: #fff;
+      margin: -40px auto 30px auto;
+      max-width: 500px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .form-section h2 {
+      margin-bottom: 20px;
+      color: #0ea5e9;
+    }
+
+    .form-section input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+
+    .form-section button {
+      width: 100%;
+      padding: 12px;
+      background: #0ea5e9;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: all 0.3s ease;
+    }
+
+    .form-section button:hover {
+      background: #2563EB;
+      transform: translateY(-2px);
+    }
+
+    /* Destination Grid */
+    .destinations {
+      margin: 50px auto;
+      max-width: 1100px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 25px;
+      padding: 0 20px;
+    }
+
+    .dest-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .dest-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.15);
+    }
+
+    .dest-card img {
+      width: 100%;
+      height: 170px;
+      object-fit: cover;
+    }
+
+    .dest-card h3 {
+      margin: 15px 0 8px;
+      color: #0ea5e9;
+    }
+
+    .dest-card p {
+      font-size: 14px;
+      padding: 0 15px 15px;
+      color: #475569;
+    }
+
+    /* Rating */
+    .rating-form {
+      padding: 0 15px 15px;
+    }
+
+    .rating-form select {
+      padding: 6px;
+      border-radius: 6px;
+      border: 1px solid #cbd5e1;
+    }
+
+    .rating-form button {
+      margin-left: 10px;
+      padding: 6px 12px;
+      border: none;
+      background-color: #0ea5e9;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .rating-form button:hover {
+      background-color: #2563EB;
+    }
+
+    .rating-result {
+      font-size: 15px;
+      margin-top: 6px;
+      font-weight: 600;
+      color: #f59e0b;
+    }
+
+    /* Support */
+    .support-box {
+      text-align: center;
+      margin: 50px auto;
+      padding: 25px;
+      background: #fff;
+      max-width: 750px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .support-box h3 {
+      margin-bottom: 10px;
+      color: #0ea5e9;
+    }
+
+    .support-box p {
+      font-size: 15px;
+    }
+
+    .support-box a {
+      color: #0ea5e9;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .support-box a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="welcome-section">
+    <h1>🌍 AI Travel Planner</h1>
+    <p>Choose your theme: Beaches, Adventures, City Tours, or Custom Plans</p>
+  </div>
+
+  <div class="form-section">
+    <h2>Register Now</h2>
+    <form action="#dest-section">
+      <input type="text" placeholder="Full Name" required>
+      <input type="email" placeholder="Email Address" required>
+      <input type="tel" placeholder="Phone Number" required>
+      <button type="submit">Start Planning</button>
+    </form>
+  </div>
+
+  <div id="dest-section" class="destinations">
+    <!-- Beaches -->
+    <div class="dest-card">
+      <img src="https://via.placeholder.com/300x170?text=Beaches" alt="Beaches">
+      <h3>Beaches</h3>
+      <p>🏖️ Popular: Goa, Maldives, Bali<br>💰 Flexible Cost: ₹15,000 – ₹2,50,000</p>
+      <form class="rating-form" onsubmit="submitRating(event, 'beaches')">
+        <label>Rate this trip:</label>
+        <select id="rating-beaches" required>
+          <option value="">--Select--</option>
+          <option value="1">1 ⭐</option>
+          <option value="2">2 ⭐⭐</option>
+          <option value="3">3 ⭐⭐⭐</option>
+          <option value="4">4 ⭐⭐⭐⭐</option>
+          <option value="5">5 ⭐⭐⭐⭐⭐</option>
+        </select>
+        <button type="submit">Submit</button>
+        <div id="avg-rating-beaches" class="rating-result">Average Rating: N/A</div>
+      </form>
+    </div>
+
+    <!-- Adventures -->
+    <div class="dest-card">
+      <img src="https://via.placeholder.com/300x170?text=Adventures" alt="Adventures">
+      <h3>Adventures</h3>
+      <p>⛰️ Popular: Rishikesh, Ladakh, Swiss Alps<br>💰 Flexible Cost: ₹20,000 – ₹3,00,000</p>
+      <form class="rating-form" onsubmit="submitRating(event, 'adventures')">
+        <label>Rate this trip:</label>
+        <select id="rating-adventures" required>
+          <option value="">--Select--</option>
+          <option value="1">1 ⭐</option>
+          <option value="2">2 ⭐⭐</option>
+          <option value="3">3 ⭐⭐⭐</option>
+          <option value="4">4 ⭐⭐⭐⭐</option>
+          <option value="5">5 ⭐⭐⭐⭐⭐</option>
+        </select>
+        <button type="submit">Submit</button>
+        <div id="avg-rating-adventures" class="rating-result">Average Rating: N/A</div>
+      </form>
+    </div>
+
+    <!-- City Tours -->
+    <div class="dest-card">
+      <img src="https://via.placeholder.com/300x170?text=City+Tours" alt="City Tours">
+      <h3>City Tours</h3>
+      <p>🏙️ Popular: Paris, Dubai, Singapore<br>💰 Flexible Cost: ₹30,000 – ₹1,50,000</p>
+      <form class="rating-form" onsubmit="submitRating(event, 'city')">
+        <label>Rate this trip:</label>
+        <select id="rating-city" required>
+          <option value="">--Select--</option>
+          <option value="1">1 ⭐</option>
+          <option value="2">2 ⭐⭐</option>
+          <option value="3">3 ⭐⭐⭐</option>
+          <option value="4">4 ⭐⭐⭐⭐</option>
+          <option value="5">5 ⭐⭐⭐⭐⭐</option>
+        </select>
+        <button type="submit">Submit</button>
+        <div id="avg-rating-city" class="rating-result">Average Rating: N/A</div>
+      </form>
+    </div>
+
+    <!-- Custom Plans -->
+    <div class="dest-card">
+      <img src="https://via.placeholder.com/300x170?text=Custom+Plans" alt="Custom Plans">
+      <h3>Custom Plans</h3>
+      <p>🎯 Tailored destinations just for you!<br>💰 Flexible Cost: Based on preferences</p>
+      <form class="rating-form" onsubmit="submitRating(event, 'custom')">
+        <label>Rate this trip:</label>
+        <select id="rating-custom" required>
+          <option value="">--Select--</option>
+          <option value="1">1 ⭐</option>
+          <option value="2">2 ⭐⭐</option>
+          <option value="3">3 ⭐⭐⭐</option>
+          <option value="4">4 ⭐⭐⭐⭐</option>
+          <option value="5">5 ⭐⭐⭐⭐⭐</option>
+        </select>
+        <button type="submit">Submit</button>
+        <div id="avg-rating-custom" class="rating-result">Average Rating: N/A</div>
+      </form>
+    </div>
+  </div>
+
+  <div class="support-box">
+    <h3>Need Travel Assistance? ✈️</h3>
+    <p>Chat with our AI assistant, call <strong>123456789</strong>, or email <a
+        href="mailto:support@aitravelplanner.com">support@aitravelplanner.com</a></p>
+  </div>
+
+  <script>
+    const ratings = {
+      beaches: [],
+      adventures: [],
+      city: [],
+      custom: []
+    };
+
+    function submitRating(e, place) {
+      e.preventDefault();
+      const select = document.getElementById('rating-' + place);
+      const value = parseInt(select.value);
+
+      if (!isNaN(value)) {
+        ratings[place].push(value);
+        const avg = ratings[place].reduce((a, b) => a + b, 0) / ratings[place].length;
+        const rounded = Math.round(avg);
+        const stars = '⭐'.repeat(rounded) + '☆'.repeat(5 - rounded);
+        document.getElementById('avg-rating-' + place).innerText = `Average Rating: ${stars}`;
+        select.value = "";
+        alert("Thank you for rating your travel experience!");
+      }
+    }
+  </script>
+</body>
+
+</html>
